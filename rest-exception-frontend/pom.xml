@@ -14,6 +14,30 @@
   <artifactId>rest-exception-frontend</artifactId>
   <version>0.1</version>
 
+  <properties>
+      <java.version>1.8</java.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+        <groupId>nl.mtin.demo</groupId>
+        <artifactId>rest-exception-shared</artifactId>
+        <version>0.1</version>
+    </dependency>
+
+    <dependency>
+    	<groupId>commons-io</groupId>
+    	<artifactId>commons-io</artifactId>
+    	<version>2.4</version>
+    </dependency>
+
+
+      <dependency>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+  </dependencies>
+
     <build>
       <plugins>
           <plugin>

@@ -5,17 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>nl.mtin.demo</groupId>
-  <artifactId>rest-exception-handling-demo</artifactId>
+  <artifactId>rest-exception-shared</artifactId>
   <version>0.1</version>
-  <packaging>pom</packaging>
-
-  <modules>
-    <module>rest-exception-shared</module>
-    <module>rest-exception-frontend</module>
-    <module>rest-exception-backend</module>
-  </modules>
 
   <properties>
       <java.version>1.8</java.version>
   </properties>
+
 </project>
