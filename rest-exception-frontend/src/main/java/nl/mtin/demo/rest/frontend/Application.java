@@ -31,6 +31,14 @@ public class Application {
         return greeting.toString();
     }
 
+    @RequestMapping("/toshort")
+    String toshort() {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setErrorHandler(new SpringServerErrorResponseHandler());
+        Greeting greeting = restTemplate.getForObject("http://localhost:8090/greeting?name=shr", Greeting.class);
+        return greeting.toString();
+    }
+
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     }
