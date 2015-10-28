@@ -5,24 +5,18 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-parent</artifactId>
-      <version>1.2.7.RELEASE</version>
+      <groupId>nl.mtin.demo</groupId>
+      <artifactId>rest-exception-handling-demo</artifactId>
+      <version>0.1</version>
   </parent>
 
-  <groupId>nl.mtin.demo</groupId>
   <artifactId>rest-exception-frontend</artifactId>
-  <version>0.1</version>
-
-  <properties>
-      <java.version>1.8</java.version>
-  </properties>
 
   <dependencies>
     <dependency>
         <groupId>nl.mtin.demo</groupId>
         <artifactId>rest-exception-shared</artifactId>
-        <version>0.1</version>
+        <version>${project.version}</version>
     </dependency>
 
     <dependency>

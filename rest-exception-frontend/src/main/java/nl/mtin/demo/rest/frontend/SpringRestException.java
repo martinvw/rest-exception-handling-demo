@@ -1,5 +1,6 @@
 package nl.mtin.demo.rest.frontend;
 
+import java.lang.reflect.Constructor;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.TimeZone;
@@ -32,8 +33,6 @@ public class SpringRestException extends RuntimeException {
 		private String error;
 		private String exception;
 		private String message;
-		// TODO
-		// an exception might be available here to?
 		private String path;
 
 		public Builder setTimestamp(long timestamp) {
@@ -77,10 +76,27 @@ public class SpringRestException extends RuntimeException {
 			return this;
 		}
 
-		public SpringRestException build()
+		@SuppressWarnings("rawtypes")
+		public RuntimeException build()
 		{
-			return new SpringRestException(this.getTimestamp(), 
+			SpringRestException restException = new SpringRestException(this.getTimestamp(), 
 					HttpStatus.valueOf(this.status), this.getMessage(), exception, path);
+			
+			if (exception != null && !exception.equals(""))
+			{
+				try {
+					Class<? extends RuntimeException> clazz = Class.forName(exception).asSubclass(RuntimeException.class);
+					Class[] argTypes = {String.class, Throwable.class};
+					Constructor<? extends RuntimeException> constructor;
+					constructor = clazz.getDeclaredConstructor(argTypes);
+					return constructor.newInstance(this.getMessage(), restException);					
+				} catch (SecurityException | ReflectiveOperationException e) {
+					// TODO log this 
+					System.err.printf("Could not rethrow exception: %s", exception);
+				}
+			}
+			
+			return restException;
 		}
 		
 	}
