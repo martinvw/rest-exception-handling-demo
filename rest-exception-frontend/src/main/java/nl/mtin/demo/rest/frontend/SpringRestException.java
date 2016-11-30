@@ -33,13 +33,21 @@ public class SpringRestException extends RuntimeException {
     }
 
     private static String getDetailMessage(Builder builder) {
-        return String.format("Error of type '%s' with message '%s' was thrown by remote server at %s, " +
-                        "when calling path '%s', status %d was returned",
-                builder.exception,
-                builder.message,
-                builder.getTimestamp(),
-                builder.path,
-                builder.status);
+        if (builder.exception == null){
+            return String.format("Status code %d was returned by remote server at %s, " +
+                            "when calling path '%s'.",
+                    builder.status,
+                    builder.getTimestamp(),
+                    builder.path);
+        } else {
+            return String.format("Error of type '%s' with message '%s' was thrown by remote server at %s, " +
+                            "when calling path '%s', status %d was returned",
+                    builder.exception,
+                    builder.message,
+                    builder.getTimestamp(),
+                    builder.path,
+                    builder.status);
+        }
     }
 
     public HttpStatus getStatus() {

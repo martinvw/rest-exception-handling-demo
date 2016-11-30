@@ -21,7 +21,7 @@ public class FrontEndController {
 		return greeting.toString();
 	}
 
-	@RequestMapping("/welcome-{name}")
+	@RequestMapping("/hello-{name}")
 	String welcome(@PathVariable(required = false) String name) {
 		Greeting greeting = restTemplate.getForObject("http://localhost:8090/greeting?name=" + name, Greeting.class);
 		return greeting.toString();
