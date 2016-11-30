@@ -12,8 +12,12 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.apache.commons.io.IOUtils;
 
 public class SpringServerErrorResponseHandler implements ResponseErrorHandler {
+    private final ResponseErrorHandler errorHandler = new DefaultResponseErrorHandler();
+    private final ObjectMapper mapper;
 
-    private ResponseErrorHandler errorHandler = new DefaultResponseErrorHandler();
+    public SpringServerErrorResponseHandler() {
+        mapper = new ObjectMapper();
+    }
 
     public boolean hasError(ClientHttpResponse response) throws IOException {
         return errorHandler.hasError(response);
@@ -21,10 +25,6 @@ public class SpringServerErrorResponseHandler implements ResponseErrorHandler {
 
     public void handleError(ClientHttpResponse response) throws IOException {
         String responseBody = IOUtils.toString(response.getBody());
-        // TODO use a logger
-        System.err.println(responseBody);
-        // TODO is the ObjectMApper expensive???
-        ObjectMapper mapper = new ObjectMapper();
         SpringRestException.Builder builder = mapper.readValue(responseBody, SpringRestException.Builder.class);
         throw builder.build();
     }
